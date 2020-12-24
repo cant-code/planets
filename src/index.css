@@ -1,0 +1,12 @@
+html,
+body {
+  height: 100%;
+  background: #649173;
+  background: -webkit-linear-gradient(to bottom, #dbd5a4, #649173);
+  background: linear-gradient(to bottom, #dbd5a4, #649173);
+  background-repeat: no-repeat;
+}
+
+#root {
+  height: inherit;
+}
