@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import ListPlanet from "../ListPlanet/ListPlanet";
 import "./Tabs.css";
 
 function CustomTabs() {
   const [key, setKey] = useState("first");
+  const [planets, setPlanets] = useState([]);
+  const [loading, setLoad] = useState(true);
+
+  useEffect(() => {
+    async function getPlanets() {
+      const fetchOptions = {
+        Method: "GET",
+        "Content-Type": "application/json",
+      };
+      const res = await fetch(
+        "https://assignment-machstatz.herokuapp.com/planet",
+        fetchOptions
+      );
+      const data = await res.json();
+      setPlanets(data);
+      setLoad(false);
+    }
+    getPlanets();
+  }, []);
 
   return (
     <Card className="custom-card my-auto mx-auto">
@@ -18,23 +38,21 @@ function CustomTabs() {
         <Card.Header>
           <Nav variant="pills">
             <Nav.Item>
-              <Nav.Link eventKey="first">Tab 1</Nav.Link>
+              <Nav.Link eventKey="first">
+                <h3>List of Planets</h3>
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second">Tab 2</Nav.Link>
+              <Nav.Link eventKey="second">
+                <h3>Favourites</h3>
+              </Nav.Link>
             </Nav.Item>
           </Nav>
         </Card.Header>
         <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-              libero aliquid magnam quibusdam, nam est cum fugiat distinctio
-              doloribus, beatae eveniet voluptatem neque? Sint iure ipsum nulla
-              recusandae voluptate natus amet, saepe soluta quia cumque. Nemo,
-              sed voluptates ea dicta minus sit tempora aut sequi ipsum
-              repudiandae quis, natus modi?
+              <ListPlanet planets={planets} loading={loading} />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
@@ -45,7 +63,6 @@ function CustomTabs() {
               adipisci quod culpa deleniti quas at.
             </Tab.Pane>
           </Tab.Content>
-          <Button variant="primary">Go somewhere</Button>
         </Card.Body>
       </Tab.Container>
     </Card>

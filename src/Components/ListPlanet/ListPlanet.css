@@ -1,0 +1,4 @@
+.custom-list {
+  max-height: 60%;
+  overflow-y: auto;
+}
