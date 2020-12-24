@@ -1,4 +1,11 @@
 .custom-card {
-  width: 50%;
-  max-height: 90%;
+  width: 100%;
+  max-height: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .custom-card {
+    width: 50%;
+    max-height: 90%;
+  }
 }

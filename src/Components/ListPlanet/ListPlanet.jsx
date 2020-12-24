@@ -29,6 +29,7 @@ function ListPlanet({ planets, loading, setPlanets }) {
             <h3>Planets</h3>
             <h3 className="ml-auto">Add to Favourites</h3>
           </Row>
+          <hr />
           <Container className="ml-1">
             {planets.map((m) => (
               <Row key={m.id}>

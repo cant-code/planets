@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-// import "./ListPlanet.css";
 
 function ListFav({ planets, loading }) {
+  const count = useMemo(() => {
+    let i = 0;
+    planets.forEach((ele) => {
+      if (ele.isFavourite) i++;
+    });
+    return i;
+  }, [planets]);
+
   return (
     <>
       {loading && (
@@ -12,7 +19,7 @@ function ListFav({ planets, loading }) {
           <span className="sr-only">Loading...</span>
         </Spinner>
       )}
-      {planets.length > 0 && (
+      {count > 0 ? (
         <Container className="ml-1">
           {planets.map(
             (m) =>
@@ -23,6 +30,8 @@ function ListFav({ planets, loading }) {
               )
           )}
         </Container>
+      ) : (
+        <h4>No planets in Favourites List</h4>
       )}
     </>
   );
