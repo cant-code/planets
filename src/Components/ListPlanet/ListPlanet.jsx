@@ -5,7 +5,17 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import "./ListPlanet.css";
 
-function ListPlanet({ planets, loading }) {
+function ListPlanet({ planets, loading, setPlanets }) {
+  const handleFav = (id) => {
+    let newPlanets = planets.map((item) => {
+      if (item.id === id) {
+        return { ...item, isFavourite: !item.isFavourite };
+      }
+      return item;
+    });
+    setPlanets(newPlanets);
+  };
+
   return (
     <>
       {loading && (
@@ -23,7 +33,13 @@ function ListPlanet({ planets, loading }) {
             {planets.map((m) => (
               <Row key={m.id}>
                 <div className="h6">{m.name}</div>
-                <Form.Check className="ml-auto" type="switch" id={m.id} />
+                <Form.Check
+                  className="ml-auto"
+                  type="switch"
+                  id={m.id}
+                  value={m.isFavourite}
+                  onChange={() => handleFav(m.id)}
+                />
               </Row>
             ))}
           </Container>

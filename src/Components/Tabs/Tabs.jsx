@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import ListPlanet from "../ListPlanet/ListPlanet";
+import ListFav from "../ListFavs/ListFav";
 import "./Tabs.css";
 
 function CustomTabs() {
@@ -52,15 +52,14 @@ function CustomTabs() {
         <Card.Body>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-              <ListPlanet planets={planets} loading={loading} />
+              <ListPlanet
+                planets={planets}
+                loading={loading}
+                setPlanets={setPlanets}
+              />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
-              magnam in consequuntur blanditiis quo ut esse? Itaque voluptas
-              excepturi omnis neque recusandae voluptates, harum officia quidem
-              earum similique eveniet libero facilis a, quisquam cumque, enim
-              minus aperiam! Optio ea, a debitis voluptates facere atque
-              adipisci quod culpa deleniti quas at.
+              <ListFav planets={planets} loading={loading} />
             </Tab.Pane>
           </Tab.Content>
         </Card.Body>
